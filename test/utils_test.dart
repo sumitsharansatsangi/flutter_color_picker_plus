@@ -1,6 +1,6 @@
 import 'dart:ui' show Color;
 
-import 'package:flutter_color_picker/src/utils.dart';
+import 'package:flutter_color_picker_plus/src/utils.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {

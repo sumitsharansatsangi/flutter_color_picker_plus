@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_color_picker/flutter_color_picker.dart';
+import 'package:flutter_color_picker_plus/flutter_color_picker_plus.dart';
 
 class MaterialColorPickerExample extends StatefulWidget {
   const MaterialColorPickerExample({
-    Key? key,
+    super.key,
     required this.pickerColor,
     required this.onColorChanged,
-  }) : super(key: key);
+  });
 
   final Color pickerColor;
   final ValueChanged<Color> onColorChanged;

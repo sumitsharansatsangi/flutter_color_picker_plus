@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_color_picker/flutter_color_picker.dart';
+import 'package:flutter_color_picker_plus/flutter_color_picker_plus.dart';
 
 import './pickers/block_picker.dart';
 import './pickers/hsv_picker.dart';
@@ -8,7 +8,7 @@ import './pickers/material_picker.dart';
 void main() => runApp(const MaterialApp(home: MyApp()));
 
 class MyApp extends StatefulWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   @override
   State<StatefulWidget> createState() => _MyAppState();

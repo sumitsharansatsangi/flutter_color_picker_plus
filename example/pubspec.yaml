@@ -1,13 +1,13 @@
-name: flutter_color_picker_example
-description: A flutter_color_picker example Flutter project.
-version: 1.0.0+1
+name: flutter_color_picker_plus_example
+description: A flutter_color_picker_plus example Flutter project.
+version: 1.0.1+1
 
 publish_to: none
 
 dependencies:
   flutter:
     sdk: flutter
-  flutter_color_picker:
+  flutter_color_picker_plus:
     path: ../
 
 dev_dependencies:

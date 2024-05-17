@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## [2.0.1]
+- Satisfy dart score
+
 ## [2.0.0]
 - Upgraded to support Flutter 3.22
 

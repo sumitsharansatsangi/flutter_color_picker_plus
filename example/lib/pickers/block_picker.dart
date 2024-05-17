@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_color_picker/flutter_color_picker.dart';
+import 'package:flutter_color_picker_plus/flutter_color_picker_plus.dart';
 
 const List<Color> colors = [
   Colors.red,
@@ -26,13 +26,13 @@ const List<Color> colors = [
 
 class BlockColorPickerExample extends StatefulWidget {
   const BlockColorPickerExample({
-    Key? key,
+    super.key,
     required this.pickerColor,
     required this.onColorChanged,
     required this.pickerColors,
     required this.onColorsChanged,
     required this.colorHistory,
-  }) : super(key: key);
+  });
 
   final Color pickerColor;
   final ValueChanged<Color> onColorChanged;

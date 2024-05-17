@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart' show CupertinoTextField;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_color_picker/flutter_color_picker.dart';
+import 'package:flutter_color_picker_plus/flutter_color_picker_plus.dart';
 
 // Just an example of how to use/interpret/format text input's result.
 void copyToClipboard(String input) {
@@ -14,12 +14,12 @@ void copyToClipboard(String input) {
 
 class HSVColorPickerExample extends StatefulWidget {
   const HSVColorPickerExample({
-    Key? key,
+    super.key,
     required this.pickerColor,
     required this.onColorChanged,
     this.colorHistory,
     this.onHistoryChanged,
-  }) : super(key: key);
+  });
 
   final Color pickerColor;
   final ValueChanged<Color> onColorChanged;
