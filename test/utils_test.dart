@@ -218,8 +218,8 @@ void main() {
       final String transparency = string.substring(4);
       test(
         'It should convert $color: to #${transparency + string} with hash',
-        () => expect(colorToHex(color, includeHashSign: true),
-            '#$transparency$string'),
+        () => expect(
+            colorToHex(color, includeHashSign: true), '#$transparency$string'),
       );
     });
 
