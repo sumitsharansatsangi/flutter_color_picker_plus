@@ -2,7 +2,7 @@
 ///
 /// You can create your own layout by importing `picker.dart`.
 
-library hsv_picker;
+library;
 
 import 'package:flutter/material.dart';
 
@@ -11,34 +11,34 @@ import 'utils.dart';
 
 /// The default layout of Color Picker.
 class ColorPicker extends StatefulWidget {
-  const ColorPicker({
-    super.key,
-    required this.pickerColor,
-    required this.onColorChanged,
-    this.pickerHsvColor,
-    this.onHsvColorChanged,
-    this.paletteType = PaletteType.hsvWithHue,
-    this.enableAlpha = true,
-    @Deprecated('Use empty list in [labelTypes] to disable label.')
-    this.showLabel = true,
-    this.labelTypes = const [
-      ColorLabelType.rgb,
-      ColorLabelType.hsv,
-      ColorLabelType.hsl
-    ],
-    @Deprecated(
-        'Use Theme.of(context).textTheme.bodyText1 & 2 to alter text style.')
-    this.labelTextStyle,
-    this.displayThumbColor = false,
-    this.portraitOnly = false,
-    this.colorPickerWidth = 300.0,
-    this.pickerAreaHeightPercent = 1.0,
-    this.pickerAreaBorderRadius = const BorderRadius.all(Radius.zero),
-    this.hexInputBar = false,
-    this.hexInputController,
-    this.colorHistory,
-    this.onHistoryChanged,
-  });
+  const ColorPicker(
+      {super.key,
+      required this.pickerColor,
+      required this.onColorChanged,
+      this.pickerHsvColor,
+      this.onHsvColorChanged,
+      this.paletteType = PaletteType.hsvWithHue,
+      this.enableAlpha = true,
+      @Deprecated('Use empty list in [labelTypes] to disable label.')
+      this.showLabel = true,
+      this.labelTypes = const [
+        ColorLabelType.rgb,
+        ColorLabelType.hsv,
+        ColorLabelType.hsl
+      ],
+      @Deprecated(
+          'Use Theme.of(context).textTheme.bodyText1 & 2 to alter text style.')
+      this.labelTextStyle,
+      this.displayThumbColor = false,
+      this.portraitOnly = false,
+      this.colorPickerWidth = 300.0,
+      this.pickerAreaHeightPercent = 1.0,
+      this.pickerAreaBorderRadius = const BorderRadius.all(Radius.zero),
+      this.hexInputBar = false,
+      this.hexInputController,
+      this.colorHistory,
+      this.onHistoryChanged,
+      this.onLabelTypeChanged});
 
   final Color pickerColor;
   final ValueChanged<Color> onColorChanged;
@@ -55,6 +55,7 @@ class ColorPicker extends StatefulWidget {
   final double pickerAreaHeightPercent;
   final BorderRadius pickerAreaBorderRadius;
   final bool hexInputBar;
+  final ValueChanged<ColorLabelType>? onLabelTypeChanged;
 
   /// Allows setting the color using text input, via [TextEditingController].
   ///
@@ -368,6 +369,7 @@ class ColorPickerState extends State<ColorPicker> {
                 enableAlpha: widget.enableAlpha,
                 textStyle: widget.labelTextStyle,
                 colorLabelTypes: widget.labelTypes,
+                onLabelTypeChanged: widget.onLabelTypeChanged,
               ),
             ),
           if (widget.hexInputBar)
@@ -461,6 +463,7 @@ class ColorPickerState extends State<ColorPicker> {
                     enableAlpha: widget.enableAlpha,
                     textStyle: widget.labelTextStyle,
                     colorLabelTypes: widget.labelTypes,
+                    onLabelTypeChanged: widget.onLabelTypeChanged,
                   ),
                 ),
               if (widget.hexInputBar)
@@ -717,6 +720,7 @@ class HueRingPicker extends StatefulWidget {
     this.hueRingStrokeWidth = 20.0,
     this.enableAlpha = false,
     this.displayThumbColor = true,
+    this.disableTextInput = false,
     this.pickerAreaBorderRadius = const BorderRadius.all(Radius.zero),
   });
 
@@ -727,6 +731,9 @@ class HueRingPicker extends StatefulWidget {
   final double hueRingStrokeWidth;
   final bool enableAlpha;
   final bool displayThumbColor;
+
+  /// Disables the ability to manually edit the ColorPicker TextInput Field
+  final bool disableTextInput;
   final BorderRadius pickerAreaBorderRadius;
 
   @override
@@ -762,13 +769,15 @@ class HueRingPickerState extends State<HueRingPicker> {
           ClipRRect(
             borderRadius: widget.pickerAreaBorderRadius,
             child: Padding(
-              padding: const EdgeInsets.all(15),
+              padding: const EdgeInsets.all(5),
               child: Stack(
                   alignment: AlignmentDirectional.center,
                   children: <Widget>[
                     SizedBox(
-                      width: widget.colorPickerHeight,
-                      height: widget.colorPickerHeight,
+                      width:
+                          widget.colorPickerHeight + widget.hueRingStrokeWidth,
+                      height:
+                          widget.colorPickerHeight + widget.hueRingStrokeWidth,
                       child: ColorPickerHueRing(
                         currentHsvColor,
                         onColorChanging,
@@ -777,8 +786,12 @@ class HueRingPickerState extends State<HueRingPicker> {
                       ),
                     ),
                     SizedBox(
-                      width: widget.colorPickerHeight / 1.6,
-                      height: widget.colorPickerHeight / 1.6,
+                      width: (widget.colorPickerHeight -
+                              widget.hueRingStrokeWidth) /
+                          1.45,
+                      height: (widget.colorPickerHeight -
+                              widget.hueRingStrokeWidth) /
+                          1.45,
                       child: ColorPickerArea(
                           currentHsvColor, onColorChanging, PaletteType.hsv),
                     )
@@ -815,6 +828,7 @@ class HueRingPickerState extends State<HueRingPicker> {
                       },
                       enableAlpha: widget.enableAlpha,
                       embeddedText: true,
+                      disable: widget.disableTextInput,
                     ),
                   ),
                 ),
@@ -840,22 +854,24 @@ class HueRingPickerState extends State<HueRingPicker> {
           ClipRRect(
             borderRadius: widget.pickerAreaBorderRadius,
             child: Padding(
-              padding: const EdgeInsets.all(15),
+              padding: const EdgeInsets.all(5),
               child: Stack(
                   alignment: AlignmentDirectional.topCenter,
                   children: <Widget>[
                     SizedBox(
-                      width: widget.colorPickerHeight -
-                          widget.hueRingStrokeWidth * 2,
-                      height: widget.colorPickerHeight -
-                          widget.hueRingStrokeWidth * 2,
+                      width:
+                          widget.colorPickerHeight - widget.hueRingStrokeWidth,
+                      height:
+                          widget.colorPickerHeight - widget.hueRingStrokeWidth,
                       child: ColorPickerHueRing(
                           currentHsvColor, onColorChanging,
                           strokeWidth: widget.hueRingStrokeWidth),
                     ),
                     Column(
                       children: [
-                        SizedBox(height: widget.colorPickerHeight / 8.5),
+                        SizedBox(
+                            height: widget.colorPickerHeight / 8.5 +
+                                widget.hueRingStrokeWidth / 2),
                         ColorIndicator(currentHsvColor),
                         const SizedBox(height: 10),
                         ColorPickerInput(
@@ -867,7 +883,7 @@ class HueRingPickerState extends State<HueRingPicker> {
                           },
                           enableAlpha: widget.enableAlpha,
                           embeddedText: true,
-                          disable: true,
+                          disable: widget.disableTextInput,
                         ),
                         if (widget.enableAlpha) const SizedBox(height: 5),
                         if (widget.enableAlpha)

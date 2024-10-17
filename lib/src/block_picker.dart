@@ -1,6 +1,6 @@
 /// Blocky Color Picker
 
-library block_colorpicker;
+library;
 
 import 'package:flutter/material.dart';
 

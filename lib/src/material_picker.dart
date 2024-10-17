@@ -1,6 +1,6 @@
 /// Material Color Picker
 
-library material_colorpicker;
+library;
 
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';

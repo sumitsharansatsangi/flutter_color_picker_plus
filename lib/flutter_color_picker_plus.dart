@@ -1,4 +1,4 @@
-library flutter_color_picker_plus;
+library;
 
 export 'src/block_picker.dart';
 export 'src/color_picker.dart';
