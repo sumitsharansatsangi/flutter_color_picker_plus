@@ -5,6 +5,47 @@ import 'dart:math';
 import 'package:flutter/painting.dart';
 import 'colors.dart';
 
+double getValueFromColor(Color color) {
+  // Reference whites
+  const Color coolWhite = Color.fromARGB(255, 204, 254, 255);
+  const Color pureWhite = Color.fromARGB(255, 255, 255, 255);
+  const Color warmWhite = Color.fromARGB(255, 255, 217, 128);
+
+  // Convert normalized channel → 0–255
+  int c(double v) => (v * 255).round().clamp(0, 255);
+
+  // Extract channels
+  final double r = c(color.r).toDouble();
+  final double g = c(color.g).toDouble();
+  final double b = c(color.b).toDouble();
+
+  double distance(Color a) {
+    final ar = c(a.r).toDouble();
+    final ag = c(a.g).toDouble();
+    final ab = c(a.b).toDouble();
+
+    // Weighted distance (human vision favors green)
+    return sqrt(
+      0.30 * pow(r - ar, 2) + 0.59 * pow(g - ag, 2) + 0.11 * pow(b - ab, 2),
+    );
+  }
+
+  final double dCool = distance(coolWhite);
+  final double dPure = distance(pureWhite);
+  final double dWarm = distance(warmWhite);
+
+  // Cool → Pure
+  if (dPure <= dWarm) {
+    final double t = dCool / (dCool + dPure);
+    return (t.clamp(0.0, 1.0)) * 0.5;
+  }
+
+  // Pure → Warm
+  final double t = dPure / (dPure + dWarm);
+  final double eased = sqrt(t.clamp(0.0, 1.0));
+  return 0.5 + eased * 0.5;
+}
+
 /// Check if is good condition to use white foreground color by passing
 /// the background color, and optional bias.
 ///
@@ -14,15 +55,14 @@ import 'colors.dart';
 ///
 /// New: https://github.com/mchome/flutter_statusbarcolor/issues/40
 bool useWhiteForeground(Color backgroundColor, {double bias = 0.0}) {
-  // Old:
-  // return 1.05 / (color.computeLuminance() + 0.05) > 4.5;
+  // Perceived brightness using normalized RGB
+  final double brightness =
+      0.299 * backgroundColor.r +
+      0.587 * backgroundColor.g +
+      0.114 * backgroundColor.b;
 
-  // New:
-  int v = sqrt(pow(backgroundColor.red, 2) * 0.299 +
-          pow(backgroundColor.green, 2) * 0.587 +
-          pow(backgroundColor.blue, 2) * 0.114)
-      .round();
-  return v < 130 + bias ? true : false;
+  // Threshold tuned for UI contrast
+  return brightness < 0.5 + bias;
 }
 
 /// Convert HSV to HSL
@@ -192,16 +232,21 @@ String colorToHex(
   bool enableAlpha = true,
   bool toUpperCase = true,
 }) {
-  final String hex = (includeHashSign ? '#' : '') +
-      (enableAlpha ? _padRadix(color.alpha) : '') +
-      _padRadix(color.red) +
-      _padRadix(color.green) +
-      _padRadix(color.blue);
+  int c(double v) => (v * 255).round().clamp(0, 255);
+
+  final String hex =
+      (includeHashSign ? '#' : '') +
+      (enableAlpha ? c(color.a).toRadixString(16).padLeft(2, '0') : '') +
+      c(color.r).toRadixString(16).padLeft(2, '0') +
+      c(color.g).toRadixString(16).padLeft(2, '0') +
+      c(color.b).toRadixString(16).padLeft(2, '0');
+
   return toUpperCase ? hex.toUpperCase() : hex;
 }
 
+
 // Shorthand for padLeft of RadixString, DRY.
-String _padRadix(int value) => value.toRadixString(16).padLeft(2, '0');
+String padRadix(int value) => value.toRadixString(16).padLeft(2, '0');
 
 // Extension for String
 extension ColorExtension1 on String {
