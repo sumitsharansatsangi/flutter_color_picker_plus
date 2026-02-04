@@ -60,33 +60,40 @@ class _MaterialPickerState extends State<MaterialPicker> {
 
     for (Color colorType in colors) {
       if (colorType == Colors.grey) {
-        result.addAll([
-          50,
-          100,
-          200,
-          300,
-          350,
-          400,
-          500,
-          600,
-          700,
-          800,
-          850,
-          900
-        ].map((int shade) => {Colors.grey[shade]!: shade.toString()}).toList());
+        result.addAll(
+          [50, 100, 200, 300, 350, 400, 500, 600, 700, 800, 850, 900]
+              .map((int shade) => {Colors.grey[shade]!: shade.toString()})
+              .toList(),
+        );
       } else if (colorType == Colors.black || colorType == Colors.white) {
         result.addAll([
           {Colors.black: ''},
-          {Colors.white: ''}
+          {Colors.white: ''},
         ]);
       } else if (colorType is MaterialAccentColor) {
-        result.addAll([100, 200, 400, 700]
-            .map((int shade) => {colorType[shade]!: 'A$shade'})
-            .toList());
+        result.addAll(
+          [
+            100,
+            200,
+            400,
+            700,
+          ].map((int shade) => {colorType[shade]!: 'A$shade'}).toList(),
+        );
       } else if (colorType is MaterialColor) {
-        result.addAll([50, 100, 200, 300, 400, 500, 600, 700, 800, 900]
-            .map((int shade) => {colorType[shade]!: shade.toString()})
-            .toList());
+        result.addAll(
+          [
+            50,
+            100,
+            200,
+            300,
+            400,
+            500,
+            600,
+            700,
+            800,
+            900,
+          ].map((int shade) => {colorType[shade]!: shade.toString()}).toList(),
+        );
       } else {
         result.add({const Color(0x00000000): ''});
       }
@@ -99,8 +106,8 @@ class _MaterialPickerState extends State<MaterialPicker> {
   void initState() {
     for (List<Color> colors in _colorTypes) {
       _shadingTypes(colors).forEach((Map<Color, String> color) {
-        if (widget.pickerColor.value == color.keys.first.value) {
-          return setState(() {
+        if (widget.pickerColor.toARGB32() == color.keys.first.toARGB32()) {
+          setState(() {
             _currentColorType = colors;
             _currentShading = color.keys.first;
           });
@@ -114,7 +121,7 @@ class _MaterialPickerState extends State<MaterialPicker> {
   Widget build(BuildContext context) {
     bool isPortrait =
         MediaQuery.of(context).orientation == Orientation.portrait ||
-            widget.portraitOnly;
+        widget.portraitOnly;
 
     Widget colorList() {
       return Container(
@@ -130,32 +137,36 @@ class _MaterialPickerState extends State<MaterialPicker> {
             color: Theme.of(context).cardColor,
             boxShadow: [
               BoxShadow(
-                  color: (Theme.of(context).brightness == Brightness.light)
-                      ? (Theme.of(context).brightness == Brightness.light)
+                color: (Theme.of(context).brightness == Brightness.light)
+                    ? (Theme.of(context).brightness == Brightness.light)
                           ? Colors.grey[300]!
                           : Colors.black38
-                      : Colors.black38,
-                  blurRadius: 10)
+                    : Colors.black38,
+                blurRadius: 10,
+              ),
             ],
             border: isPortrait
                 ? Border(
                     right: BorderSide(
-                        color:
-                            (Theme.of(context).brightness == Brightness.light)
-                                ? Colors.grey[300]!
-                                : Colors.black38,
-                        width: 1))
+                      color: (Theme.of(context).brightness == Brightness.light)
+                          ? Colors.grey[300]!
+                          : Colors.black38,
+                      width: 1,
+                    ),
+                  )
                 : Border(
                     top: BorderSide(
-                        color:
-                            (Theme.of(context).brightness == Brightness.light)
-                                ? Colors.grey[300]!
-                                : Colors.black38,
-                        width: 1)),
+                      color: (Theme.of(context).brightness == Brightness.light)
+                          ? Colors.grey[300]!
+                          : Colors.black38,
+                      width: 1,
+                    ),
+                  ),
           ),
           child: ScrollConfiguration(
-            behavior: ScrollConfiguration.of(context)
-                .copyWith(dragDevices: PointerDeviceKind.values.toSet()),
+            behavior: ScrollConfiguration.of(
+              context,
+            ).copyWith(dragDevices: PointerDeviceKind.values.toSet()),
             child: ListView(
               scrollDirection: isPortrait ? Axis.vertical : Axis.horizontal,
               children: [
@@ -190,9 +201,9 @@ class _MaterialPickerState extends State<MaterialPicker> {
                                         ? BoxShadow(
                                             color:
                                                 (Theme.of(context).brightness ==
-                                                        Brightness.light)
-                                                    ? Colors.grey[300]!
-                                                    : Colors.black38,
+                                                    Brightness.light)
+                                                ? Colors.grey[300]!
+                                                : Colors.black38,
                                             blurRadius: 10,
                                           )
                                         : BoxShadow(
@@ -203,11 +214,13 @@ class _MaterialPickerState extends State<MaterialPicker> {
                                 : null,
                             border: colorType == Theme.of(context).cardColor
                                 ? Border.all(
-                                    color: (Theme.of(context).brightness ==
+                                    color:
+                                        (Theme.of(context).brightness ==
                                             Brightness.light)
                                         ? Colors.grey[300]!
                                         : Colors.black38,
-                                    width: 1)
+                                    width: 1,
+                                  )
                                 : null,
                           ),
                         ),
@@ -227,16 +240,18 @@ class _MaterialPickerState extends State<MaterialPicker> {
 
     Widget shadingList() {
       return ScrollConfiguration(
-        behavior: ScrollConfiguration.of(context)
-            .copyWith(dragDevices: PointerDeviceKind.values.toSet()),
+        behavior: ScrollConfiguration.of(
+          context,
+        ).copyWith(dragDevices: PointerDeviceKind.values.toSet()),
         child: ListView(
           scrollDirection: isPortrait ? Axis.vertical : Axis.horizontal,
           children: [
             isPortrait
                 ? const Padding(padding: EdgeInsets.only(top: 15))
                 : const Padding(padding: EdgeInsets.only(left: 15)),
-            ..._shadingTypes(_currentColorType)
-                .map((Map<Color, String> colors) {
+            ..._shadingTypes(_currentColorType).map((
+              Map<Color, String> colors,
+            ) {
               final Color color = colors.keys.first;
               return GestureDetector(
                 onTap: () {
@@ -266,74 +281,75 @@ class _MaterialPickerState extends State<MaterialPicker> {
                                 (color == Colors.white) ||
                                         (color == Colors.black)
                                     ? BoxShadow(
-                                        color: (Theme.of(context).brightness ==
+                                        color:
+                                            (Theme.of(context).brightness ==
                                                 Brightness.light)
                                             ? Colors.grey[300]!
                                             : Colors.black38,
                                         blurRadius: 10,
                                       )
-                                    : BoxShadow(
-                                        color: color,
-                                        blurRadius: 10,
-                                      ),
+                                    : BoxShadow(color: color, blurRadius: 10),
                               ]
                             : null,
                         border:
                             (color == Colors.white) || (color == Colors.black)
-                                ? Border.all(
-                                    color: (Theme.of(context).brightness ==
-                                            Brightness.light)
-                                        ? Colors.grey[300]!
-                                        : Colors.black38,
-                                    width: 1)
-                                : null,
+                            ? Border.all(
+                                color:
+                                    (Theme.of(context).brightness ==
+                                        Brightness.light)
+                                    ? Colors.grey[300]!
+                                    : Colors.black38,
+                                width: 1,
+                              )
+                            : null,
                       ),
                       child: widget.enableLabel
                           ? isPortrait
-                              ? Row(
-                                  children: [
-                                    Text(
-                                      '  ${colors.values.first}',
-                                      style: TextStyle(
+                                ? Row(
+                                    children: [
+                                      Text(
+                                        '  ${colors.values.first}',
+                                        style: TextStyle(
                                           color: useWhiteForeground(color)
                                               ? Colors.white
-                                              : Colors.black),
-                                    ),
-                                    Expanded(
-                                      child: Align(
-                                        alignment: Alignment.centerRight,
-                                        child: Text(
-                                          '#${(color.toString().replaceFirst('Color(0xff', '').replaceFirst(')', '')).toUpperCase()}  ',
-                                          style: TextStyle(
-                                            color: useWhiteForeground(color)
-                                                ? Colors.white
-                                                : Colors.black,
-                                            fontWeight: FontWeight.bold,
+                                              : Colors.black,
+                                        ),
+                                      ),
+                                      Expanded(
+                                        child: Align(
+                                          alignment: Alignment.centerRight,
+                                          child: Text(
+                                            '#${(color.toString().replaceFirst('Color(0xff', '').replaceFirst(')', '')).toUpperCase()}  ',
+                                            style: TextStyle(
+                                              color: useWhiteForeground(color)
+                                                  ? Colors.white
+                                                  : Colors.black,
+                                              fontWeight: FontWeight.bold,
+                                            ),
                                           ),
                                         ),
                                       ),
-                                    ),
-                                  ],
-                                )
-                              : AnimatedOpacity(
-                                  duration: const Duration(milliseconds: 300),
-                                  opacity: _currentShading == color ? 1 : 0,
-                                  child: Container(
-                                    padding: const EdgeInsets.only(top: 16),
-                                    alignment: Alignment.topCenter,
-                                    child: Text(
-                                      colors.values.first,
-                                      style: TextStyle(
-                                        color: useWhiteForeground(color)
-                                            ? Colors.white
-                                            : Colors.black,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 14,
+                                    ],
+                                  )
+                                : AnimatedOpacity(
+                                    duration: const Duration(milliseconds: 300),
+                                    opacity: _currentShading == color ? 1 : 0,
+                                    child: Container(
+                                      padding: const EdgeInsets.only(top: 16),
+                                      alignment: Alignment.topCenter,
+                                      child: Text(
+                                        colors.values.first,
+                                        style: TextStyle(
+                                          color: useWhiteForeground(color)
+                                              ? Colors.white
+                                              : Colors.black,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 14,
+                                        ),
+                                        softWrap: false,
                                       ),
-                                      softWrap: false,
                                     ),
-                                  ),
-                                )
+                                  )
                           : const SizedBox(),
                     ),
                   ),

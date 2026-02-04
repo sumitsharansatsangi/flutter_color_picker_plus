@@ -37,7 +37,7 @@ class _HSVColorPickerExampleState extends State<HSVColorPickerExample> {
   bool _displayThumbColor = true;
   final List<ColorLabelType> _labelTypes = [
     ColorLabelType.hsl,
-    ColorLabelType.hsv
+    ColorLabelType.hsv,
   ];
   bool _displayHexInputBar = false;
 
@@ -54,8 +54,8 @@ class _HSVColorPickerExampleState extends State<HSVColorPickerExample> {
 
   // Picker 4
   final textController = TextEditingController(
-      text:
-          '#2F19DB'); // The initial value can be provided directly to the controller.
+    text: '#2F19DB',
+  ); // The initial value can be provided directly to the controller.
   bool _enableAlpha4 = true;
 
   @override
@@ -112,9 +112,10 @@ class _HSVColorPickerExampleState extends State<HSVColorPickerExample> {
               child: Text(
                 'Color Picker with Slider',
                 style: TextStyle(
-                    color: useWhiteForeground(widget.pickerColor)
-                        ? Colors.white
-                        : Colors.black),
+                  color: useWhiteForeground(widget.pickerColor)
+                      ? Colors.white
+                      : Colors.black,
+                ),
               ),
             ),
             const SizedBox(width: 20),
@@ -125,8 +126,7 @@ class _HSVColorPickerExampleState extends State<HSVColorPickerExample> {
                   builder: (BuildContext context) {
                     return AlertDialog(
                       content: SingleChildScrollView(
-                        child: Text(
-                          '''
+                        child: Text('''
 ColorPicker(
   pickerColor: color,
   onColorChanged: changeColor,
@@ -144,8 +144,7 @@ ColorPicker(
   colorHistory: colorHistory,
   onHistoryChanged: changeColorHistory,
 )
-                          ''',
-                        ),
+                          '''),
                       ),
                     );
                   },
@@ -156,10 +155,12 @@ ColorPicker(
                 shadowColor: widget.pickerColor.withOpacity(1),
                 elevation: 10,
               ),
-              child: Icon(Icons.code,
-                  color: useWhiteForeground(widget.pickerColor)
-                      ? Colors.white
-                      : Colors.black),
+              child: Icon(
+                Icons.code,
+                color: useWhiteForeground(widget.pickerColor)
+                    ? Colors.white
+                    : Colors.black,
+              ),
             ),
           ],
         ),
@@ -190,22 +191,25 @@ ColorPicker(
                     value: type,
                     child: SizedBox(
                       width: 150,
-                      child: Text(type.toString().split('.').last,
-                          textAlign: TextAlign.end),
+                      child: Text(
+                        type.toString().split('.').last,
+                        textAlign: TextAlign.end,
+                      ),
                     ),
-                  )
+                  ),
               ],
             ),
           ),
         ),
         ExpansionTile(
-          title:
-              Text(_labelTypes.isNotEmpty ? 'Display Label' : 'Disable Label'),
+          title: Text(
+            _labelTypes.isNotEmpty ? 'Display Label' : 'Disable Label',
+          ),
           subtitle: Text(
             _labelTypes.isNotEmpty
                 ? _labelTypes
-                    .map((e) => e.toString().split('.').last.toUpperCase())
-                    .toString()
+                      .map((e) => e.toString().split('.').last.toUpperCase())
+                      .toString()
                 : '',
           ),
           children: [
@@ -272,14 +276,16 @@ ColorPicker(
                       titlePadding: const EdgeInsets.all(0),
                       contentPadding: const EdgeInsets.all(0),
                       shape: RoundedRectangleBorder(
-                        borderRadius: MediaQuery.of(context).orientation ==
+                        borderRadius:
+                            MediaQuery.of(context).orientation ==
                                 Orientation.portrait
                             ? const BorderRadius.vertical(
                                 top: Radius.circular(500),
                                 bottom: Radius.circular(100),
                               )
                             : const BorderRadius.horizontal(
-                                right: Radius.circular(500)),
+                                right: Radius.circular(500),
+                              ),
                       ),
                       content: SingleChildScrollView(
                         child: HueRingPicker(
@@ -301,9 +307,10 @@ ColorPicker(
               child: Text(
                 'Hue Ring Picker with Hex Input',
                 style: TextStyle(
-                    color: useWhiteForeground(widget.pickerColor)
-                        ? Colors.white
-                        : Colors.black),
+                  color: useWhiteForeground(widget.pickerColor)
+                      ? Colors.white
+                      : Colors.black,
+                ),
               ),
             ),
             const SizedBox(width: 20),
@@ -314,16 +321,14 @@ ColorPicker(
                   builder: (BuildContext context) {
                     return AlertDialog(
                       content: SingleChildScrollView(
-                        child: Text(
-                          '''
+                        child: Text('''
 HueRingPicker(
   pickerColor: color,
   onColorChanged: changeColor,
   enableAlpha: $_enableAlpha2,
   displayThumbColor: $_displayThumbColor2,
 )
-                          ''',
-                        ),
+                          '''),
                       ),
                     );
                   },
@@ -334,10 +339,12 @@ HueRingPicker(
                 shadowColor: widget.pickerColor.withOpacity(1),
                 elevation: 10,
               ),
-              child: Icon(Icons.code,
-                  color: useWhiteForeground(widget.pickerColor)
-                      ? Colors.white
-                      : Colors.black),
+              child: Icon(
+                Icons.code,
+                color: useWhiteForeground(widget.pickerColor)
+                    ? Colors.white
+                    : Colors.black,
+              ),
             ),
           ],
         ),
@@ -368,7 +375,8 @@ HueRingPicker(
                       titlePadding: const EdgeInsets.all(0),
                       contentPadding: const EdgeInsets.all(0),
                       shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(25))),
+                        borderRadius: BorderRadius.all(Radius.circular(25)),
+                      ),
                       content: SingleChildScrollView(
                         child: SlidePicker(
                           pickerColor: widget.pickerColor,
@@ -379,7 +387,8 @@ HueRingPicker(
                           showParams: _showParams,
                           showIndicator: _showIndicator,
                           indicatorBorderRadius: const BorderRadius.vertical(
-                              top: Radius.circular(25)),
+                            top: Radius.circular(25),
+                          ),
                         ),
                       ),
                     );
@@ -394,9 +403,10 @@ HueRingPicker(
               child: Text(
                 'Slider-only Color Picker',
                 style: TextStyle(
-                    color: useWhiteForeground(widget.pickerColor)
-                        ? Colors.white
-                        : Colors.black),
+                  color: useWhiteForeground(widget.pickerColor)
+                      ? Colors.white
+                      : Colors.black,
+                ),
               ),
             ),
             const SizedBox(width: 20),
@@ -407,8 +417,7 @@ HueRingPicker(
                   builder: (BuildContext context) {
                     return AlertDialog(
                       content: SingleChildScrollView(
-                        child: Text(
-                          '''
+                        child: Text('''
 SlidePicker(
   pickerColor: color,
   onColorChanged: changeColor,
@@ -419,8 +428,7 @@ SlidePicker(
   showIndicator: $_showIndicator,
   indicatorBorderRadius: const BorderRadius.vertical(top: Radius.circular(25)),
 )
-                          ''',
-                        ),
+                          '''),
                       ),
                     );
                   },
@@ -431,10 +439,12 @@ SlidePicker(
                 shadowColor: widget.pickerColor.withOpacity(1),
                 elevation: 10,
               ),
-              child: Icon(Icons.code,
-                  color: useWhiteForeground(widget.pickerColor)
-                      ? Colors.white
-                      : Colors.black),
+              child: Icon(
+                Icons.code,
+                color: useWhiteForeground(widget.pickerColor)
+                    ? Colors.white
+                    : Colors.black,
+              ),
             ),
           ],
         ),
@@ -452,10 +462,12 @@ SlidePicker(
                     value: type,
                     child: SizedBox(
                       width: 50,
-                      child: Text(type.toString().split('.').last,
-                          textAlign: TextAlign.end),
+                      child: Text(
+                        type.toString().split('.').last,
+                        textAlign: TextAlign.end,
+                      ),
                     ),
-                  )
+                  ),
               ],
             ),
           ),
@@ -535,8 +547,9 @@ SlidePicker(
                               controller: textController,
                               // Everything below is purely optional.
                               prefix: const Padding(
-                                  padding: EdgeInsets.only(left: 8),
-                                  child: Icon(Icons.tag)),
+                                padding: EdgeInsets.only(left: 8),
+                                child: Icon(Icons.tag),
+                              ),
                               suffix: IconButton(
                                 icon: const Icon(Icons.content_paste_rounded),
                                 onPressed: () =>
@@ -549,10 +562,11 @@ SlidePicker(
                                 // here or use any Form validator you want.
                                 UpperCaseTextFormatter(),
                                 FilteringTextInputFormatter.allow(
-                                    RegExp(kValidHexPattern)),
+                                  RegExp(kValidHexPattern),
+                                ),
                               ],
                             ),
-                          )
+                          ),
                         ],
                       ),
                     );
@@ -567,9 +581,10 @@ SlidePicker(
               child: Text(
                 '  HSV Color Picker\n(Your own text field)',
                 style: TextStyle(
-                    color: useWhiteForeground(widget.pickerColor)
-                        ? Colors.white
-                        : Colors.black),
+                  color: useWhiteForeground(widget.pickerColor)
+                      ? Colors.white
+                      : Colors.black,
+                ),
               ),
             ),
             const SizedBox(width: 20),
@@ -580,8 +595,7 @@ SlidePicker(
                   builder: (BuildContext context) {
                     return AlertDialog(
                       content: SingleChildScrollView(
-                        child: Text(
-                          '''
+                        child: Text('''
 Column(
   children: [
     ColorPicker(
@@ -619,8 +633,7 @@ Column(
     )
   ],
 )
-                          ''',
-                        ),
+                          '''),
                       ),
                     );
                   },
@@ -631,10 +644,12 @@ Column(
                 shadowColor: widget.pickerColor.withOpacity(1),
                 elevation: 10,
               ),
-              child: Icon(Icons.code,
-                  color: useWhiteForeground(widget.pickerColor)
-                      ? Colors.white
-                      : Colors.black),
+              child: Icon(
+                Icons.code,
+                color: useWhiteForeground(widget.pickerColor)
+                    ? Colors.white
+                    : Colors.black,
+              ),
             ),
           ],
         ),

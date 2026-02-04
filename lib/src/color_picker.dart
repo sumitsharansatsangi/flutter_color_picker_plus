@@ -266,7 +266,7 @@ class ColorPickerState extends State<ColorPicker> {
     return ClipRRect(
       borderRadius: widget.pickerAreaBorderRadius,
       child: Padding(
-       padding: EdgeInsets.all(
+        padding: EdgeInsets.all(
           [
                 PaletteType.hueWheel,
                 PaletteType.temperatureWheel,
@@ -305,10 +305,12 @@ class ColorPickerState extends State<ColorPicker> {
         return colorPickerSlider(TrackType.green);
       case PaletteType.rgbWithRed:
         return colorPickerSlider(TrackType.red);
-        case PaletteType.temperatureWheel:
+      case PaletteType.temperatureWheel:
         return SizedBox(
-          width: 100,height:100,
-          child: ColoredBox(color:Colors.amber));
+          width: 100,
+          height: 100,
+          child: ColoredBox(color: Colors.amber),
+        );
     }
   }
 
@@ -344,24 +346,24 @@ class ColorPickerState extends State<ColorPicker> {
                     }),
                     child: ColorIndicator(currentHsvColor),
                   ),
-                  if (widget.showPreview)
-                Expanded(
-                  child: Column(
-                    children: <Widget>[
-                      SizedBox(
-                        height: 40.0,
-                        width: widget.colorPickerWidth - 75.0,
-                        child: sliderByPaletteType(),
-                      ),
-                      if (widget.enableAlpha)
+                if (widget.showPreview)
+                  Expanded(
+                    child: Column(
+                      children: <Widget>[
                         SizedBox(
                           height: 40.0,
                           width: widget.colorPickerWidth - 75.0,
-                          child: colorPickerSlider(TrackType.alpha),
+                          child: sliderByPaletteType(),
                         ),
-                    ],
+                        if (widget.enableAlpha)
+                          SizedBox(
+                            height: 40.0,
+                            width: widget.colorPickerWidth - 75.0,
+                            child: colorPickerSlider(TrackType.alpha),
+                          ),
+                      ],
+                    ),
                   ),
-                ),
               ],
             ),
           ),

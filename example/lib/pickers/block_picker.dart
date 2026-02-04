@@ -53,7 +53,10 @@ class _BlockColorPickerExampleState extends State<BlockColorPickerExample> {
   double _iconSize = 24;
 
   Widget pickerLayoutBuilder(
-      BuildContext context, List<Color> colors, PickerItem child) {
+    BuildContext context,
+    List<Color> colors,
+    PickerItem child,
+  ) {
     Orientation orientation = MediaQuery.of(context).orientation;
 
     return SizedBox(
@@ -71,7 +74,10 @@ class _BlockColorPickerExampleState extends State<BlockColorPickerExample> {
   }
 
   Widget pickerItemBuilder(
-      Color color, bool isCurrentColor, void Function() changeColor) {
+    Color color,
+    bool isCurrentColor,
+    void Function() changeColor,
+  ) {
     return Container(
       margin: const EdgeInsets.all(8),
       decoration: BoxDecoration(
@@ -79,9 +85,10 @@ class _BlockColorPickerExampleState extends State<BlockColorPickerExample> {
         color: color,
         boxShadow: [
           BoxShadow(
-              color: color.withOpacity(0.8),
-              offset: const Offset(1, 2),
-              blurRadius: _blurRadius)
+            color: color.withOpacity(0.8),
+            offset: const Offset(1, 2),
+            blurRadius: _blurRadius,
+          ),
         ],
       ),
       child: Material(
@@ -118,8 +125,7 @@ class _BlockColorPickerExampleState extends State<BlockColorPickerExample> {
                     titlePadding: const EdgeInsets.all(0),
                     contentPadding: const EdgeInsets.all(25),
                     content: SingleChildScrollView(
-                      child: Text(
-                        '''
+                      child: Text('''
 Widget pickerLayoutBuilder(BuildContext context, List<Color> colors, PickerItem child) {
   Orientation orientation = MediaQuery.of(context).orientation;
 
@@ -134,8 +140,7 @@ Widget pickerLayoutBuilder(BuildContext context, List<Color> colors, PickerItem 
     ),
   );
 }
-                            ''',
-                      ),
+                            '''),
                     ),
                   );
                 },
@@ -146,10 +151,12 @@ Widget pickerLayoutBuilder(BuildContext context, List<Color> colors, PickerItem 
               shadowColor: widget.pickerColor.withOpacity(1),
               elevation: 10,
             ),
-            child: Icon(Icons.code,
-                color: useWhiteForeground(widget.pickerColor)
-                    ? Colors.white
-                    : Colors.black),
+            child: Icon(
+              Icons.code,
+              color: useWhiteForeground(widget.pickerColor)
+                  ? Colors.white
+                  : Colors.black,
+            ),
           ),
         ),
         ListTile(
@@ -196,8 +203,7 @@ Widget pickerLayoutBuilder(BuildContext context, List<Color> colors, PickerItem 
                     titlePadding: const EdgeInsets.all(0),
                     contentPadding: const EdgeInsets.all(25),
                     content: SingleChildScrollView(
-                      child: Text(
-                        '''
+                      child: Text('''
 Widget pickerItemBuilder(Color color, bool isCurrentColor, void Function() changeColor) {
   return Container(
     margin: const EdgeInsets.all(8),
@@ -224,8 +230,7 @@ Widget pickerItemBuilder(Color color, bool isCurrentColor, void Function() chang
     ),
   );
 }
-                            ''',
-                      ),
+                            '''),
                     ),
                   );
                 },
@@ -236,10 +241,12 @@ Widget pickerItemBuilder(Color color, bool isCurrentColor, void Function() chang
               shadowColor: widget.pickerColor.withOpacity(1),
               elevation: 10,
             ),
-            child: Icon(Icons.code,
-                color: useWhiteForeground(widget.pickerColor)
-                    ? Colors.white
-                    : Colors.black),
+            child: Icon(
+              Icons.code,
+              color: useWhiteForeground(widget.pickerColor)
+                  ? Colors.white
+                  : Colors.black,
+            ),
           ),
         ),
         ListTile(
@@ -326,9 +333,10 @@ Widget pickerItemBuilder(Color color, bool isCurrentColor, void Function() chang
               child: Text(
                 'Blocky Color Picker',
                 style: TextStyle(
-                    color: useWhiteForeground(widget.pickerColor)
-                        ? Colors.white
-                        : Colors.black),
+                  color: useWhiteForeground(widget.pickerColor)
+                      ? Colors.white
+                      : Colors.black,
+                ),
               ),
             ),
             const SizedBox(width: 20),
@@ -341,8 +349,7 @@ Widget pickerItemBuilder(Color color, bool isCurrentColor, void Function() chang
                       titlePadding: EdgeInsets.all(0),
                       contentPadding: EdgeInsets.all(25),
                       content: SingleChildScrollView(
-                        child: Text(
-                          '''
+                        child: Text('''
 BlockPicker(
   pickerColor: color,
   onColorChanged: changeColor,
@@ -350,8 +357,7 @@ BlockPicker(
   layoutBuilder: pickerLayoutBuilder,
   itemBuilder: pickerItemBuilder,
 )
-                          ''',
-                        ),
+                          '''),
                       ),
                     );
                   },
@@ -362,10 +368,12 @@ BlockPicker(
                 shadowColor: widget.pickerColor.withOpacity(1),
                 elevation: 10,
               ),
-              child: Icon(Icons.code,
-                  color: useWhiteForeground(widget.pickerColor)
-                      ? Colors.white
-                      : Colors.black),
+              child: Icon(
+                Icons.code,
+                color: useWhiteForeground(widget.pickerColor)
+                    ? Colors.white
+                    : Colors.black,
+              ),
             ),
           ],
         ),
@@ -406,9 +414,10 @@ BlockPicker(
               child: Text(
                 'Multiple selection Blocky Color Picker',
                 style: TextStyle(
-                    color: useWhiteForeground(widget.pickerColor)
-                        ? Colors.white
-                        : Colors.black),
+                  color: useWhiteForeground(widget.pickerColor)
+                      ? Colors.white
+                      : Colors.black,
+                ),
               ),
             ),
             const SizedBox(width: 20),
@@ -421,8 +430,7 @@ BlockPicker(
                       titlePadding: EdgeInsets.all(0),
                       contentPadding: EdgeInsets.all(25),
                       content: SingleChildScrollView(
-                        child: Text(
-                          '''
+                        child: Text('''
 MultipleChoiceBlockPicker(
   pickerColors: colors,
   onColorsChanged: changeColors,
@@ -430,8 +438,7 @@ MultipleChoiceBlockPicker(
   layoutBuilder: pickerLayoutBuilder,
   itemBuilder: pickerItemBuilder,
 )
-                          ''',
-                        ),
+                          '''),
                       ),
                     );
                   },
@@ -442,10 +449,12 @@ MultipleChoiceBlockPicker(
                 shadowColor: widget.pickerColor.withOpacity(1),
                 elevation: 10,
               ),
-              child: Icon(Icons.code,
-                  color: useWhiteForeground(widget.pickerColor)
-                      ? Colors.white
-                      : Colors.black),
+              child: Icon(
+                Icons.code,
+                color: useWhiteForeground(widget.pickerColor)
+                    ? Colors.white
+                    : Colors.black,
+              ),
             ),
           ],
         ),

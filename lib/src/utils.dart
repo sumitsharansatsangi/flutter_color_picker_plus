@@ -96,7 +96,8 @@ HSVColor hslToHsv(HSLColor color) {
   double s = 0.0;
   double v = 0.0;
 
-  v = color.lightness +
+  v =
+      color.lightness +
       color.saturation *
           (color.lightness < 0.5 ? color.lightness : 1 - color.lightness);
   if (v != 0) s = 2 - 2 * color.lightness / v;
@@ -244,7 +245,6 @@ String colorToHex(
   return toUpperCase ? hex.toUpperCase() : hex;
 }
 
-
 // Shorthand for padLeft of RadixString, DRY.
 String padRadix(int value) => value.toRadixString(16).padLeft(2, '0');
 
@@ -259,10 +259,14 @@ extension ColorExtension1 on String {
 
 // Extension from Color
 extension ColorExtension2 on Color {
-  String toHexString(
-          {bool includeHashSign = false,
-          bool enableAlpha = true,
-          bool toUpperCase = true}) =>
-      colorToHex(this,
-          includeHashSign: false, enableAlpha: true, toUpperCase: true);
+  String toHexString({
+    bool includeHashSign = false,
+    bool enableAlpha = true,
+    bool toUpperCase = true,
+  }) => colorToHex(
+    this,
+    includeHashSign: false,
+    enableAlpha: true,
+    toUpperCase: true,
+  );
 }

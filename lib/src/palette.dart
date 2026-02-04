@@ -696,7 +696,7 @@ class TemperatureWheelPainter extends CustomPainter {
     canvas.drawCircle(
       center,
       radio,
-     Paint()..color = Colors.black.withValues(alpha: 1 - hsvColor.value),
+      Paint()..color = Colors.black.withValues(alpha: 1 - hsvColor.value),
     );
 
     canvas.drawCircle(
@@ -712,7 +712,6 @@ class TemperatureWheelPainter extends CustomPainter {
   @override
   bool shouldRepaint(CustomPainter oldDelegate) => false;
 }
-
 
 /// Painter for hue ring.
 class HueRingPainter extends CustomPainter {
@@ -1713,7 +1712,6 @@ class ColorPickerArea extends StatelessWidget {
     onColorChanged(HSVColor.fromColor(color));
   }
 
-
   void _handleGesture(
     Offset position,
     BuildContext context,
@@ -1738,7 +1736,7 @@ class ColorPickerArea extends StatelessWidget {
           (atan2(horizontal - center.dx, vertical - center.dy) / pi + 1) /
           2 *
           360;
-     if (paletteType == PaletteType.temperatureWheel) {
+      if (paletteType == PaletteType.temperatureWheel) {
         _handleTemperatureWheelChange(vertical / height);
       } else {
         _handleColorWheelChange(
@@ -1866,10 +1864,10 @@ class ColorPickerArea extends StatelessWidget {
                       circleSelectorWidth,
                     ),
                   );
-                 case PaletteType.temperatureWheel:
+                case PaletteType.temperatureWheel:
                   return CustomPaint(
                     painter: TemperatureWheelPainter(hsvColor),
-                  );  
+                  );
               }
             },
           ),

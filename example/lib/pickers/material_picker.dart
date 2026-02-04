@@ -58,9 +58,10 @@ class _MaterialColorPickerExampleState
               child: Text(
                 'Kiss Me with Your Finger',
                 style: TextStyle(
-                    color: useWhiteForeground(widget.pickerColor)
-                        ? Colors.white
-                        : Colors.black),
+                  color: useWhiteForeground(widget.pickerColor)
+                      ? Colors.white
+                      : Colors.black,
+                ),
               ),
             ),
             const SizedBox(width: 20),
@@ -73,16 +74,14 @@ class _MaterialColorPickerExampleState
                       titlePadding: const EdgeInsets.all(0),
                       contentPadding: const EdgeInsets.all(25),
                       content: SingleChildScrollView(
-                        child: Text(
-                          '''
+                        child: Text('''
 MaterialPicker(
   pickerColor: color,
   onColorChanged: changeColor,
   enableLabel: $_enableLabel,
   portraitOnly: $_portraitOnly,
 )
-                          ''',
-                        ),
+                          '''),
                       ),
                     );
                   },
@@ -93,10 +92,12 @@ MaterialPicker(
                 shadowColor: widget.pickerColor.withOpacity(1),
                 elevation: 10,
               ),
-              child: Icon(Icons.code,
-                  color: useWhiteForeground(widget.pickerColor)
-                      ? Colors.white
-                      : Colors.black),
+              child: Icon(
+                Icons.code,
+                color: useWhiteForeground(widget.pickerColor)
+                    ? Colors.white
+                    : Colors.black,
+              ),
             ),
           ],
         ),
