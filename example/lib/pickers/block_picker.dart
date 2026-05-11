@@ -85,7 +85,7 @@ class _BlockColorPickerExampleState extends State<BlockColorPickerExample> {
         color: color,
         boxShadow: [
           BoxShadow(
-            color: color.withOpacity(0.8),
+            color: color.withValues(alpha: 0.8),
             offset: const Offset(1, 2),
             blurRadius: _blurRadius,
           ),
@@ -148,7 +148,7 @@ Widget pickerLayoutBuilder(BuildContext context, List<Color> colors, PickerItem 
             },
             style: ElevatedButton.styleFrom(
               backgroundColor: widget.pickerColor,
-              shadowColor: widget.pickerColor.withOpacity(1),
+              shadowColor: widget.pickerColor.withValues(alpha: 1.0),
               elevation: 10,
             ),
             child: Icon(
@@ -210,7 +210,7 @@ Widget pickerItemBuilder(Color color, bool isCurrentColor, void Function() chang
     decoration: BoxDecoration(
       borderRadius: BorderRadius.circular($_borderRadius),
       color: color,
-      boxShadow: [BoxShadow(color: color.withOpacity(0.8), offset: const Offset(1, 2), blurRadius: $_blurRadius)],
+      boxShadow: [BoxShadow(color: color.withValues(alpha: 0.8), offset: const Offset(1, 2), blurRadius: $_blurRadius)],
     ),
     child: Material(
       color: Colors.transparent,
@@ -238,7 +238,7 @@ Widget pickerItemBuilder(Color color, bool isCurrentColor, void Function() chang
             },
             style: ElevatedButton.styleFrom(
               backgroundColor: widget.pickerColor,
-              shadowColor: widget.pickerColor.withOpacity(1),
+              shadowColor: widget.pickerColor.withValues(alpha: 1.0),
               elevation: 10,
             ),
             child: Icon(
@@ -327,7 +327,7 @@ Widget pickerItemBuilder(Color color, bool isCurrentColor, void Function() chang
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: widget.pickerColor,
-                shadowColor: widget.pickerColor.withOpacity(1),
+                shadowColor: widget.pickerColor.withValues(alpha: 1.0),
                 elevation: 10,
               ),
               child: Text(
@@ -365,7 +365,7 @@ BlockPicker(
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: widget.pickerColor,
-                shadowColor: widget.pickerColor.withOpacity(1),
+                shadowColor: widget.pickerColor.withValues(alpha: 1.0),
                 elevation: 10,
               ),
               child: Icon(
@@ -408,7 +408,7 @@ BlockPicker(
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: widget.pickerColor,
-                shadowColor: widget.pickerColor.withOpacity(1),
+                shadowColor: widget.pickerColor.withValues(alpha: 1.0),
                 elevation: 10,
               ),
               child: Text(
@@ -446,7 +446,7 @@ MultipleChoiceBlockPicker(
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: widget.pickerColor,
-                shadowColor: widget.pickerColor.withOpacity(1),
+                shadowColor: widget.pickerColor.withValues(alpha: 1.0),
                 elevation: 10,
               ),
               child: Icon(

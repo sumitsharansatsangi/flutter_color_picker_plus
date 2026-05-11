@@ -106,7 +106,7 @@ class _HSVColorPickerExampleState extends State<HSVColorPickerExample> {
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: widget.pickerColor,
-                shadowColor: widget.pickerColor.withOpacity(1),
+                shadowColor: widget.pickerColor.withValues(alpha: 1.0),
                 elevation: 10,
               ),
               child: Text(
@@ -152,7 +152,7 @@ ColorPicker(
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: widget.pickerColor,
-                shadowColor: widget.pickerColor.withOpacity(1),
+                shadowColor: widget.pickerColor.withValues(alpha: 1.0),
                 elevation: 10,
               ),
               child: Icon(
@@ -301,7 +301,7 @@ ColorPicker(
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: widget.pickerColor,
-                shadowColor: widget.pickerColor.withOpacity(1),
+                shadowColor: widget.pickerColor.withValues(alpha: 1.0),
                 elevation: 10,
               ),
               child: Text(
@@ -336,7 +336,7 @@ HueRingPicker(
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: widget.pickerColor,
-                shadowColor: widget.pickerColor.withOpacity(1),
+                shadowColor: widget.pickerColor.withValues(alpha: 1.0),
                 elevation: 10,
               ),
               child: Icon(
@@ -397,7 +397,7 @@ HueRingPicker(
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: widget.pickerColor,
-                shadowColor: widget.pickerColor.withOpacity(1),
+                shadowColor: widget.pickerColor.withValues(alpha: 1.0),
                 elevation: 10,
               ),
               child: Text(
@@ -436,7 +436,7 @@ SlidePicker(
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: widget.pickerColor,
-                shadowColor: widget.pickerColor.withOpacity(1),
+                shadowColor: widget.pickerColor.withValues(alpha: 1.0),
                 elevation: 10,
               ),
               child: Icon(
@@ -575,7 +575,7 @@ SlidePicker(
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: widget.pickerColor,
-                shadowColor: widget.pickerColor.withOpacity(1),
+                shadowColor: widget.pickerColor.withValues(alpha: 1.0),
                 elevation: 10,
               ),
               child: Text(
@@ -641,7 +641,7 @@ Column(
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: widget.pickerColor,
-                shadowColor: widget.pickerColor.withOpacity(1),
+                shadowColor: widget.pickerColor.withValues(alpha: 1.0),
                 elevation: 10,
               ),
               child: Icon(

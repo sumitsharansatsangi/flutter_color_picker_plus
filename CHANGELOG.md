@@ -1,5 +1,20 @@
 # CHANGELOG
 
+## [2.4.0]
+- Added full Flutter localization support with English and Spanish translations
+- Implemented CMYK and LAB color space support with conversion functions
+- Extended ColorLabelType enum to include CMYK and LAB options
+- Updated ColorPicker and SlidePicker to support new color spaces
+- Enhanced accessibility with semantic labels for screen readers
+- Updated example app to demonstrate localization features
+
+## [2.3.0]
+- Updated flutter_lints to latest version
+- Fixed deprecated withOpacity() usage in example app, replaced with withValues()
+- Added comprehensive widget tests for ColorPicker, BlockPicker, MaterialPicker, and SlidePicker
+- Improved test coverage for UI components
+- Enhanced documentation and code quality
+
 ## [2.0.1]
 - Satisfy dart score
 

@@ -52,7 +52,7 @@ class _MaterialColorPickerExampleState
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: widget.pickerColor,
-                shadowColor: widget.pickerColor.withOpacity(1),
+                shadowColor: widget.pickerColor.withValues(alpha: 1.0),
                 elevation: 10,
               ),
               child: Text(
@@ -89,7 +89,7 @@ MaterialPicker(
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: widget.pickerColor,
-                shadowColor: widget.pickerColor.withOpacity(1),
+                shadowColor: widget.pickerColor.withValues(alpha: 1.0),
                 elevation: 10,
               ),
               child: Icon(

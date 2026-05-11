@@ -9,6 +9,8 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import '../l10n/app_localizations.dart';
+
 import 'utils.dart';
 
 /// Palette types for color picker area widget.
@@ -42,10 +44,10 @@ enum TrackType {
 }
 
 /// Color information label type.
-enum ColorLabelType { hex, rgb, hsv, hsl }
+enum ColorLabelType { hex, rgb, hsv, hsl, cmyk, lab }
 
 /// Types for slider picker widget.
-enum ColorModel { rgb, hsv, hsl }
+enum ColorModel { rgb, hsv, hsl, cmyk, lab }
 // enum ColorSpace { rgb, hsv, hsl, hsp, okhsv, okhsl, xyz, yuv, lab, lch, cmyk }
 
 /// Painter for SV mixture.
@@ -1121,14 +1123,30 @@ class ColorPickerLabel extends StatefulWidget {
 }
 
 class ColorPickerLabelState extends State<ColorPickerLabel> {
-  final Map<ColorLabelType, List<String>> _colorTypes = const {
-    ColorLabelType.hex: ['R', 'G', 'B', 'A'],
-    ColorLabelType.rgb: ['R', 'G', 'B', 'A'],
-    ColorLabelType.hsv: ['H', 'S', 'V', 'A'],
-    ColorLabelType.hsl: ['H', 'S', 'L', 'A'],
-  };
-
   late ColorLabelType _colorType;
+
+  Map<ColorLabelType, List<String>> get _colorTypes {
+    final AppLocalizations? localizations = AppLocalizations.of(context);
+    if (localizations == null) {
+      // Fallback to English if localization not available
+      return const {
+        ColorLabelType.hex: ['R', 'G', 'B', 'A'],
+        ColorLabelType.rgb: ['R', 'G', 'B', 'A'],
+        ColorLabelType.hsv: ['H', 'S', 'V', 'A'],
+        ColorLabelType.hsl: ['H', 'S', 'L', 'A'],
+        ColorLabelType.cmyk: ['C', 'M', 'Y', 'K'],
+        ColorLabelType.lab: ['L', 'A', 'B', 'A'],
+      };
+    }
+    return {
+      ColorLabelType.hex: [localizations.redLabel, localizations.greenLabel, localizations.blueLabel, localizations.alphaLabel],
+      ColorLabelType.rgb: [localizations.redLabel, localizations.greenLabel, localizations.blueLabel, localizations.alphaLabel],
+      ColorLabelType.hsv: [localizations.hueLabel, localizations.saturationLabel, localizations.valueLabel, localizations.alphaLabel],
+      ColorLabelType.hsl: [localizations.hueLabel, localizations.saturationLabel, localizations.lightnessLabel, localizations.alphaLabel],
+      ColorLabelType.cmyk: [localizations.cyanLabel, localizations.magentaLabel, localizations.yellowLabel, localizations.blackLabel],
+      ColorLabelType.lab: [localizations.lLabel, localizations.aLabel, localizations.bLabel, localizations.alphaLabel],
+    };
+  }
 
   @override
   void initState() {
@@ -1168,6 +1186,24 @@ class ColorPickerLabelState extends State<ColorPickerLabel> {
         '${hslColor.hue.round()}°',
         '${(hslColor.saturation * 100).round()}%',
         '${(hslColor.lightness * 100).round()}%',
+        '${(hsvColor.alpha * 100).round()}%',
+      ];
+    } else if (colorLabelType == ColorLabelType.cmyk) {
+      final Color color = hsvColor.toColor();
+      final List<double> cmyk = rgbToCmyk(color);
+      return [
+        '${(cmyk[0] * 100).round()}%',
+        '${(cmyk[1] * 100).round()}%',
+        '${(cmyk[2] * 100).round()}%',
+        '${(cmyk[3] * 100).round()}%',
+      ];
+    } else if (colorLabelType == ColorLabelType.lab) {
+      final Color color = hsvColor.toColor();
+      final List<double> lab = rgbToLab(color);
+      return [
+        '${lab[0].round()}',
+        '${lab[1].round()}',
+        '${lab[2].round()}',
         '${(hsvColor.alpha * 100).round()}%',
       ];
     } else {

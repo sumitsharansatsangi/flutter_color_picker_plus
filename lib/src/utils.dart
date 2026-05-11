@@ -270,3 +270,104 @@ extension ColorExtension2 on Color {
     toUpperCase: true,
   );
 }
+
+/// Convert RGB to CMYK
+List<double> rgbToCmyk(Color color) {
+  final double r = color.r;
+  final double g = color.g;
+  final double b = color.b;
+
+  final double k = 1 - max(r, max(g, b));
+  if (k == 1) return [0, 0, 0, 1];
+
+  final double c = (1 - r - k) / (1 - k);
+  final double m = (1 - g - k) / (1 - k);
+  final double y = (1 - b - k) / (1 - k);
+
+  return [c, m, y, k];
+}
+
+/// Convert CMYK to RGB
+Color cmykToRgb(double c, double m, double y, double k) {
+  final double r = (1 - c) * (1 - k);
+  final double g = (1 - m) * (1 - k);
+  final double b = (1 - y) * (1 - k);
+
+  return Color.fromRGBO(
+    (r * 255).round(),
+    (g * 255).round(),
+    (b * 255).round(),
+    1.0,
+  );
+}
+
+/// Convert RGB to LAB
+List<double> rgbToLab(Color color) {
+  // Convert to XYZ first
+  double r = color.r;
+  double g = color.g;
+  double b = color.b;
+
+  // Linearize RGB
+  r = r > 0.04045 ? pow((r + 0.055) / 1.055, 2.4).toDouble() : r / 12.92;
+  g = g > 0.04045 ? pow((g + 0.055) / 1.055, 2.4).toDouble() : g / 12.92;
+  b = b > 0.04045 ? pow((b + 0.055) / 1.055, 2.4).toDouble() : b / 12.92;
+
+  r *= 100;
+  g *= 100;
+  b *= 100;
+
+  // XYZ
+  final double x = r * 0.4124 + g * 0.3576 + b * 0.1805;
+  final double y = r * 0.2126 + g * 0.7152 + b * 0.0722;
+  final double z = r * 0.0193 + g * 0.1192 + b * 0.9505;
+
+  // LAB
+  final double xr = x / 95.047;
+  final double yr = y / 100.0;
+  final double zr = z / 108.883;
+
+  final double fx = xr > 0.008856 ? pow(xr, 1/3).toDouble() : (7.787 * xr) + 16/116;
+  final double fy = yr > 0.008856 ? pow(yr, 1/3).toDouble() : (7.787 * yr) + 16/116;
+  final double fz = zr > 0.008856 ? pow(zr, 1/3).toDouble() : (7.787 * zr) + 16/116;
+
+  final double l = (116 * fy) - 16;
+  final double a = 500 * (fx - fy);
+  final double bb = 200 * (fy - fz);
+
+  return [l, a, bb];
+}
+
+/// Convert LAB to RGB (simplified approximation)
+Color labToRgb(double l, double a, double b) {
+  double y = (l + 16) / 116;
+  double x = a / 500 + y;
+  double z = y - b / 200;
+
+  x = x > 0.206897 ? pow(x, 3).toDouble() : (x - 16/116) / 7.787;
+  y = y > 0.206897 ? pow(y, 3).toDouble() : (y - 16/116) / 7.787;
+  z = z > 0.206897 ? pow(z, 3).toDouble() : (z - 16/116) / 7.787;
+
+  x *= 95.047;
+  y *= 100.0;
+  z *= 108.883;
+
+  x /= 100;
+  y /= 100;
+  z /= 100;
+
+  double r = x * 3.2406 + y * -1.5372 + z * -0.4986;
+  double g = x * -0.9689 + y * 1.8758 + z * 0.0415;
+  double bb = x * 0.0557 + y * -0.2040 + z * 1.0570;
+
+  r = r > 0.0031308 ? 1.055 * pow(r, 1/2.4) - 0.055 : 12.92 * r;
+  g = g > 0.0031308 ? 1.055 * pow(g, 1/2.4) - 0.055 : 12.92 * g;
+  bb = bb > 0.0031308 ? 1.055 * pow(bb, 1/2.4) - 0.055 : 12.92 * bb;
+
+  return Color.fromRGBO(
+    (r.clamp(0, 1) * 255).round(),
+    (g.clamp(0, 1) * 255).round(),
+    (bb.clamp(0, 1) * 255).round(),
+    1.0,
+  );
+}

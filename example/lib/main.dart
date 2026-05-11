@@ -1,20 +1,43 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_color_picker_plus/flutter_color_picker_plus.dart';
+import 'package:flutter_color_picker_plus/l10n/app_localizations.dart';
 
 import './pickers/block_picker.dart';
 import './pickers/hsv_picker.dart';
 import './pickers/material_picker.dart';
 
-void main() => runApp(const MaterialApp(home: MyApp()));
+void main() => runApp(const MyApp());
 
-class MyApp extends StatefulWidget {
+class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
-  State<StatefulWidget> createState() => _MyAppState();
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      localizationsDelegates: const [
+        AppLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: const [
+        Locale('en', ''), // English
+        Locale('es', ''), // Spanish
+      ],
+      home: const MyHomePage(),
+    );
+  }
 }
 
-class _MyAppState extends State<MyApp> {
+class MyHomePage extends StatefulWidget {
+  const MyHomePage({super.key});
+
+  @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
   bool lightTheme = true;
   Color currentColor = Colors.amber;
   List<Color> currentColors = [Colors.yellow, Colors.green];
