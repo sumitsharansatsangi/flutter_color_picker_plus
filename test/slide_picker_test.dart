@@ -5,14 +5,13 @@ import 'package:flutter_color_picker_plus/flutter_color_picker_plus.dart';
 void main() {
   group('SlidePicker Widget Tests', () {
     testWidgets('SlidePicker renders correctly', (WidgetTester tester) async {
-      final Color initialColor = Colors.blue;
-      Color selectedColor = initialColor;
+      Color selectedColor = Colors.blue;
 
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
             body: SlidePicker(
-              pickerColor: initialColor,
+              pickerColor: selectedColor,
               onColorChanged: (color) {
                 selectedColor = color;
               },
@@ -29,14 +28,13 @@ void main() {
     });
 
     testWidgets('SlidePicker changes color on slider interaction', (WidgetTester tester) async {
-      final Color initialColor = Colors.red;
-      Color selectedColor = initialColor;
+      Color selectedColor = Colors.red;
 
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
             body: SlidePicker(
-              pickerColor: initialColor,
+              pickerColor: selectedColor,
               onColorChanged: (color) {
                 selectedColor = color;
               },

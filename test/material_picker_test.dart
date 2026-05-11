@@ -5,14 +5,13 @@ import 'package:flutter_color_picker_plus/flutter_color_picker_plus.dart';
 void main() {
   group('MaterialPicker Widget Tests', () {
     testWidgets('MaterialPicker renders correctly', (WidgetTester tester) async {
-      final Color initialColor = Colors.blue;
-      Color selectedColor = initialColor;
+      Color selectedColor = Colors.blue;
 
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
             body: MaterialPicker(
-              pickerColor: initialColor,
+              pickerColor: selectedColor,
               onColorChanged: (color) {
                 selectedColor = color;
               },
@@ -30,13 +29,13 @@ void main() {
 
 
     testWidgets('MaterialPicker with labels enabled', (WidgetTester tester) async {
-      final Color initialColor = Colors.green;
+      Color selectedColor = Colors.green;
 
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
             body: MaterialPicker(
-              pickerColor: initialColor,
+              pickerColor: selectedColor,
               onColorChanged: (_) {},
               enableLabel: true,
             ),
@@ -50,13 +49,13 @@ void main() {
     });
 
     testWidgets('MaterialPicker in portrait only mode', (WidgetTester tester) async {
-      final Color initialColor = Colors.purple;
+      Color selectedColor = Colors.purple;
 
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
             body: MaterialPicker(
-              pickerColor: initialColor,
+              pickerColor: selectedColor,
               onColorChanged: (_) {},
               portraitOnly: true,
             ),
@@ -68,14 +67,13 @@ void main() {
     });
 
     testWidgets('MaterialPicker with onPrimaryChanged callback', (WidgetTester tester) async {
-      final Color initialColor = Colors.orange;
-      Color? primaryColor;
+      Color? primaryColor = Colors.orange;
 
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
             body: MaterialPicker(
-              pickerColor: initialColor,
+              pickerColor: primaryColor,
               onColorChanged: (_) {},
               onPrimaryChanged: (color) {
                 primaryColor = color;

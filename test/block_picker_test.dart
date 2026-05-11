@@ -5,14 +5,13 @@ import 'package:flutter_color_picker_plus/flutter_color_picker_plus.dart';
 void main() {
   group('BlockPicker Widget Tests', () {
     testWidgets('BlockPicker renders correctly', (WidgetTester tester) async {
-      final Color initialColor = Colors.blue;
-      Color selectedColor = initialColor;
+      Color selectedColor = Colors.blue;
 
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
             body: BlockPicker(
-              pickerColor: initialColor,
+              pickerColor: selectedColor,
               onColorChanged: (color) {
                 selectedColor = color;
               },
